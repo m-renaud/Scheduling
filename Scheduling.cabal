@@ -16,7 +16,7 @@ build-type:          Simple
 cabal-version:       >=1.10
 
 library
-  exposed-modules:     Driver, Scheduling.Types, Scheduling.JobUtils
+  exposed-modules:     Playground, Driver, DataStructures.Queue, Scheduling.Types, Scheduling.JobUtils, Scheduling.Algorithm.RoundRobin
   -- other-modules:       
   other-extensions:    RecordWildCards
   build-depends:       base >=4.8 && <4.9, transformers >=0.4 && <0.5, mtl >=2.2 && <2.3
