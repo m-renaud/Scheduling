@@ -24,7 +24,7 @@ data SchedulerDriverActions t = ClockCycles Int
 --   - When a job finished, add the job name to a list.
 --   - When all processes have completed, do nothing else.
 runJobs :: t Job -> (t Job -> s Job) -> Scheduler s -> IO ((), [String])
-runJobs jobs preprocessor scheduler = undefined 
+runJobs jobs preprocessor scheduler = 
   runWriterT $ runContT (runJobsDriver (preprocessor jobs) scheduler 0) action
   where action :: SchedulerDriverActions t -> WriterT [String] IO ()
         action (ClockCycles cycles)  = liftIO $ printCycles cycles
