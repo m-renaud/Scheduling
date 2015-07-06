@@ -5,6 +5,7 @@ import Data.HashPSQ as PSQ
 import Driver
 import Scheduling.Algorithm.RoundRobin as RR
 import Scheduling.Algorithm.ShortestJobFirst as SJF
+import Scheduling.Driver.CustomDrivers
 import Scheduling.Types
 
 -- | Sample list of jobs to schedule.
