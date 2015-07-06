@@ -24,7 +24,7 @@ runJobsDriver jobs runScheduler cycles = ContT $ \performAction -> do
   performAction (ClockCycles cycles)
   performAction BetweenCycles
   case runScheduler jobs of
-   Nothing -> return ()
+   Nothing -> performAction Done
    Just decision@(SchedulerDecision job status cyclesUsed remainingJobs) -> do
      performAction $ OnDecision decision
      when (isFinished status) $ performAction (JobFinished job)
