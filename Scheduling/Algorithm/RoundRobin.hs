@@ -15,7 +15,7 @@ preprocessJobs = fromList
 addNewJobs :: Queue Job -> [Job] -> Queue Job
 addNewJobs existingJobs = foldl enq existingJobs
 
-scheduleJob :: CpuTime -> Scheduler Queue
+scheduleJob :: CpuTime -> Scheduler Queue Job
 scheduleJob time jobs
   | Q.null jobs = Nothing
   | otherwise  = Just $ SchedulerDecision job outcome (min time timeRemaining) remainingJobs

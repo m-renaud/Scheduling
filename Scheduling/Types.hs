@@ -48,17 +48,17 @@ isFinished Finished = True
 isFinished _        = False
 
 -- | The decision made by the scheduler.
-data SchedulerDecision t =
+data SchedulerDecision t j =
   SchedulerDecision { decisionJobToRun      :: Job  -- ^ The job to be run next.
                     , decisionJobStatus     :: JobStatus  -- ^ The status of the job after running.
                     , decisionCpuTimeUsed   :: CpuTime  -- ^ The CPU time to allocate to the job.
-                    , decisionJobsRemaining :: t Job  -- ^ The jobs that still need to be scheduled.
+                    , decisionJobsRemaining :: t j  -- ^ The jobs that still need to be scheduled.
                     } 
 
 -- | A scheduling algorithm where t is the internal representation used to store the jobs.
-type Scheduler t =
+type Scheduler t j =
   -- | A sequence of jobs to schedule, already in the internal representation
-  t Job
+  t j
   -- | Just the decision made by the scheduler, Nothing if no jobs to schedule.
-  -> Maybe (SchedulerDecision t) 
+  -> Maybe (SchedulerDecision t j) 
 

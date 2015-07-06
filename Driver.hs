@@ -11,11 +11,11 @@ import Data.Maybe (fromJust)
 import Scheduling.Types
 
 -- | The actions to perform on each of the stages of the scheduling algorithm driver.
-data SchedulerDriverActions t = ClockCycles Int
-                              | BetweenCycles
-                              | OnDecision (SchedulerDecision t)
-                              | JobFinished Job
-                              | Done
+data SchedulerDriverActions t j = ClockCycles Int
+                                | BetweenCycles
+                                | OnDecision (SchedulerDecision t j)
+                                | JobFinished Job
+                                | Done
 
 -- | Run the provided 'jobs':
 --   - Print the number of cycles used so far each iteration.
@@ -23,10 +23,10 @@ data SchedulerDriverActions t = ClockCycles Int
 --   - When a decision is made, print it.
 --   - When a job finished, add the job name to a list.
 --   - When all processes have completed, do nothing else.
-runJobs :: t Job -> (t Job -> s Job) -> Scheduler s -> IO ((), [String])
+runJobs :: t Job -> (t Job -> s j) -> Scheduler s j -> IO ((), [String])
 runJobs jobs preprocessor scheduler = 
   runWriterT $ runContT (runJobsDriver (preprocessor jobs) scheduler 0) action
-  where action :: SchedulerDriverActions t -> WriterT [String] IO ()
+  where action :: SchedulerDriverActions t j -> WriterT [String] IO ()
         action (ClockCycles cycles)  = liftIO $ printCycles cycles
         action  BetweenCycles        = return ()
         action (OnDecision decision) = liftIO $ printDecision decision
@@ -56,7 +56,7 @@ runJobsDelay jobs preprocessor scheduler =
 -- | The driver for a scheduling algorithm.
 --   Schedule the list of jobs given a scheduling algorithm, the number of cycles used so
 --   far, and actions for each of the continuations.
-runJobsDriver :: Monad m => t Job -> Scheduler t -> Int -> ContT () m (SchedulerDriverActions t)
+runJobsDriver :: Monad m => t j -> Scheduler t j -> Int -> ContT () m (SchedulerDriverActions t j)
 runJobsDriver jobs runScheduler cycles = ContT $ \performAction -> do
   performAction (ClockCycles cycles)
   performAction BetweenCycles
@@ -72,7 +72,7 @@ runJobsDriver jobs runScheduler cycles = ContT $ \performAction -> do
 printCycles :: Int -> IO ()
 printCycles cycles = putStrLn $ "Cycles: " ++ show cycles
 
-printDecision :: SchedulerDecision t -> IO ()
+printDecision :: SchedulerDecision t j -> IO ()
 printDecision (SchedulerDecision job status cycles remainingJobs) =
   putStrLn $ "Running job " ++ jobName job ++ " for " ++ show cycles ++ " cycles."
 
