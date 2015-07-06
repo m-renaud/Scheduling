@@ -4,7 +4,7 @@ module Scheduling.Algorithm.RoundRobin
        , scheduleJob
        ) where
 
-import DataStructures.Queue
+import DataStructures.Queue as Q
   
 import Scheduling.JobUtils
 import Scheduling.Types
@@ -17,7 +17,7 @@ addNewJobs existingJobs = foldl enq existingJobs
 
 scheduleJob :: CpuTime -> Scheduler Queue
 scheduleJob time jobs
-  | empty jobs = Nothing
+  | Q.null jobs = Nothing
   | otherwise  = Just $ SchedulerDecision job outcome (min time timeRemaining) remainingJobs
   where (job, jobs') = deq jobs
         timeRemaining = jobTimeRemaining job

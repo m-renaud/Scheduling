@@ -1,7 +1,7 @@
 module DataStructures.Queue
        ( Queue
        , newQueue
-       , empty
+       , DataStructures.Queue.null
        , enq
        , deq
        , fromList
@@ -16,9 +16,9 @@ instance (Show a) => Show (Queue a) where
 newQueue :: Queue a
 newQueue = Queue [] []
 
-empty :: Queue a -> Bool
-empty (Queue [] []) = True
-empty _             = False
+null :: Queue a -> Bool
+null (Queue [] []) = True
+null _             = False
 
 enq :: Queue a -> a -> Queue a
 enq (Queue xs ys) y = Queue xs (y:ys)
