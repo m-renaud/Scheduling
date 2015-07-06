@@ -1,7 +1,10 @@
 module Playground where
 
+import Data.HashPSQ as PSQ
+
 import Driver
 import Scheduling.Algorithm.RoundRobin as RR
+import Scheduling.Algorithm.ShortestJobFirst as SJF
 import Scheduling.Types
 
 -- | Sample list of jobs to schedule.
@@ -15,3 +18,6 @@ jobList = [mkJob "A" 4 (Priority 3),
 --   jobs in the order they completed will be returned.
 roundRobinSample :: IO ((), [String])
 roundRobinSample = runJobs jobList RR.preprocessJobs (RR.scheduleJob 2)
+
+sjfSample :: IO ((), [String])
+sjfSample = runJobs jobList SJF.preprocessJobs SJF.scheduleJob
