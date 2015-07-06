@@ -1,7 +1,8 @@
 {-# LANGUAGE RecordWildCards #-}
 
 module Scheduling.JobUtils
-       ( updateTimeRemaining
+       ( isFinished
+       , updateTimeRemaining
        , priorityOrder
        , timeRemainingOrder
        ) where
@@ -9,6 +10,10 @@ module Scheduling.JobUtils
 import Data.Ord (comparing)
 
 import Scheduling.Types
+
+isFinished :: JobStatus -> Bool
+isFinished Finished = True
+isFinished _        = False
 
 updateTimeRemaining :: Job -> CpuTime -> Job
 updateTimeRemaining j@Job{..} t = j { jobTimeRemaining = jobTimeRemaining - t }

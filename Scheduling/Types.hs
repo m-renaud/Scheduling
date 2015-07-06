@@ -10,7 +10,6 @@ module Scheduling.Types
        , Scheduler
        , SchedulerDecision(..)
        , mkJob
-       , isFinished
        ) where
 
 data Job =
@@ -42,10 +41,6 @@ data Priority = Priority Int
 -- | finished.
 data JobStatus = Finished | Unfinished
                deriving (Eq, Read, Show)
-
-isFinished :: JobStatus -> Bool
-isFinished Finished = True
-isFinished _        = False
 
 -- | The decision made by the scheduler.
 data SchedulerDecision t j =
