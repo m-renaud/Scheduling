@@ -13,7 +13,12 @@ Build-Type:          Simple
 Cabal-Version:       >=1.10
 
 Library
-  Exposed-Modules:     Playground, Driver, DataStructures.Queue, Scheduling.Types, Scheduling.JobUtils, Scheduling.Algorithm.RoundRobin
+  Exposed-Modules: Playground
+                 , Driver
+                 , DataStructures.Queue
+                 , Scheduling.Types
+                 , Scheduling.JobUtils
+                 , Scheduling.Algorithm.RoundRobin
   -- other-modules:       
   Other-Extensions:    RecordWildCards
   Build-Depends:       base >=4.8 && <4.9, transformers >=0.4 && <0.5, mtl >=2.2 && <2.3, psqueues >= 0.2.0.0 && <0.3.0.0
