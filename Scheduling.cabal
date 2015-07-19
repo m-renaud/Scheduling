@@ -24,3 +24,11 @@ Library
   Build-Depends:       base >=4.8 && <4.9, transformers >=0.4 && <0.5, mtl >=2.2 && <2.3, psqueues >= 0.2.0.0 && <0.3.0.0
   Hs-Source-Dirs:      src
   Default-Language:    Haskell2010
+
+Test-Suite test
+  Build-Depends: base >=4.8 && < 4.9
+               , HTF >= 0.13.0.0
+  Type: exitcode-stdio-1.0
+  Hs-Source-Dirs: src, testsuite/unittest
+  Main-Is: TestSuite.hs
+  Default-Language: Haskell2010
