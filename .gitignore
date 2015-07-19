@@ -1,2 +1,5 @@
 TAGS
+.cabal-sandbox
+cabal.sandbox.config
+.HTF
 dist
